@@ -335,3 +335,7 @@ MUPDF_TTF_FONTS_DIR=$(MUPDF_DIR)/resources/fonts
 DYNLIB_CFLAGS=-L$(OUTPUT_DIR)/libs $(CFLAGS) \
 		-I$(LUA_DIR)/src -shared -Wl,-E -Wl,-rpath,'$$ORIGIN'
 
+
+LJ_WPACLIENT_FILES=wpaclient.lua wpa_ctrl.lua socket_h.lua socket.lua
+LJ_WPACLIENT_DIR=$(OUTPUT_DIR)/common/lj-wpaclient
+LJ_WPACLIENT=$(foreach f, $(LJ_WPACLIENT_FILES), $(LJ_WPACLIENT_DIR)/$(f))

@@ -52,3 +52,6 @@
 [submodule "zsync"]
 	path = zsync
 	url = http://zsync.moria.org.uk/zsync.git
+[submodule "lj-wpaclient"]
+	path = lj-wpaclient
+	url = https://github.com/koreader/lj-wpaclient.git
