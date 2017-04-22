@@ -23,6 +23,19 @@ else()
     set(CFG_ENV_VAR "")
     set(CFG_OPTS "shared")
 endif()
+
+if(${APPLE})
+    execute_process(
+        COMMAND "uname" "-sm"
+        OUTPUT_VARIABLE UNAME_SYSTEMMACHINE
+    )
+
+    if(UNAME_SYSTEMMACHINE MATCHES "Darwin x86_64")
+        set(CONFIG_SCRIPT "Configure")
+        set(CFG_OPTS "darwin64-x86_64-cc ${CFG_OPTS}")
+    endif()
+endif()
+
 set(CFG_OPTS "${CFG_OPTS} no-asm no-idea no-mdc2 no-rc5 enable-ssl2")
 set(CFG_CMD sh -c "${CFG_ENV_VAR} ${SOURCE_DIR}/${CONFIG_SCRIPT} ${CFG_OPTS}")
 

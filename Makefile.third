@@ -527,7 +527,7 @@ $(SQLITE_LIB): $(THIRDPARTY_DIR)/sqlite/CMakeLists.txt
 			-DCFLAGS="$(CFLAGS)" \
 		$(CURDIR)/thirdparty/sqlite && \
 		$(MAKE)
-	cp $(SQLITE_DIR)/lib/libsqlite3.so $(OUTPUT_DIR)/libs
+	cp $(SQLITE_DIR)/lib/libsqlite3$(LIB_EXT) $(OUTPUT_DIR)/libs
 
 $(LUA_LJ_SQLITE) $(OUTPUT_DIR)/common/xsys.lua: $(LUA_LJ_SQLITE_DIR)/init.lua $(LUA_LJ_SQLITE_DIR)/xsys.lua
 	install -d $(LUA_LJ_SQLITE_INSTALL_DIR)
