@@ -480,6 +480,7 @@ LUASEC_BUILD_DIR=$(THIRDPARTY_DIR)/luasec/build/$(MACHINE)
 LUASEC_DIR=$(CURDIR)/$(LUASEC_BUILD_DIR)/luasec-prefix/src/luasec
 LUASOCKET=$(OUTPUT_DIR)/common/socket
 LUASEC=$(OUTPUT_DIR)/common/ssl
+LUASEC_LIB=$(OUTPUT_DIR)/common/ssl.so
 
 EVERNOTE_SDK_BUILD_DIR=$(THIRDPARTY_DIR)/evernote-sdk-lua/build/$(MACHINE)
 EVERNOTE_SDK_DIR=$(CURDIR)/$(EVERNOTE_SDK_BUILD_DIR)/evernote-sdk-lua-prefix/src/evernote-sdk-lua

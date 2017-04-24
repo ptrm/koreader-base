@@ -373,6 +373,16 @@ $(OPENSSL_LIB) $(OPENSSL_DIR): $(THIRDPARTY_DIR)/openssl/CMakeLists.txt
 		-DCONFIG_SCRIPT="$(if $(EMULATE_READER),config,Configure $(if $(WIN32),mingw,linux-generic32))" \
 		$(CURDIR)/$(THIRDPARTY_DIR)/openssl && \
 		$(MAKE)
+ifdef DARWIN
+	cp -fL $(OPENSSL_DIR)/$(notdir $(SSL_LIB)) $(SSL_LIB)
+	cp -fL $(OPENSSL_DIR)/$(notdir $(CRYPTO_LIB)) $(CRYPTO_LIB)
+	install_name_tool -change /usr/local/ssl/lib/$(notdir $(SSL_LIB)) \
+		libs/$(notdir $(SSL_LIB)) $(SSL_LIB)
+	install_name_tool -change /usr/local/ssl/lib/$(notdir $(CRYPTO_LIB)) \
+		libs/$(notdir $(CRYPTO_LIB)) $(SSL_LIB)
+	install_name_tool -change /usr/local/ssl/lib/$(notdir $(CRYPTO_LIB)) \
+		libs/$(notdir $(CRYPTO_LIB)) $(CRYPTO_LIB)
+endif
 
 $(SSL_LIB): $(OPENSSL_LIB)
 	cp -fL $(OPENSSL_DIR)/$(notdir $(SSL_LIB)) $(SSL_LIB)
@@ -391,6 +401,12 @@ $(LUASEC): $(OPENSSL_DIR) $(THIRDPARTY_DIR)/luasec/CMakeLists.txt
 		-DLUAPATH="$(CURDIR)/$(OUTPUT_DIR)/common" \
 		$(CURDIR)/$(THIRDPARTY_DIR)/luasec && \
 		$(MAKE)
+ifdef DARWIN
+	install_name_tool -change /usr/local/ssl/lib/$(notdir $(SSL_LIB)) \
+		libs/$(notdir $(SSL_LIB)) $(LUASEC_LIB)
+	install_name_tool -change /usr/local/ssl/lib/$(notdir $(CRYPTO_LIB)) \
+		libs/$(notdir $(CRYPTO_LIB)) $(LUASEC_LIB)
+endif
 
 $(LUASERIAL_LIB): $(THIRDPARTY_DIR)/lua-serialize/CMakeLists.txt
 	install -d $(LUASERIAL_BUILD_DIR)
